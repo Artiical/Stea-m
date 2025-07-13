@@ -1,0 +1,31 @@
+{# templates/library/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma Bibliothèque{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Ma Bibliothèque</h1>
+        <a href="{{ path('home') }}" class="btn btn-link">← Retour à l'accueil</a>
+        <a href="{{ path('shop_index') }}" class="btn btn-primary">Acheter plus de jeux</a>
+        
+        {% if games is not empty %}
+            <div class="library-games">
+                {% for game in games %}
+                    <div class="library-item">
+                        <h3>{{ game.title }}</h3>
+                        <p>{{ game.description }}</p>
+                        <p><span class="price">{{ game.price }} €</span> <small style="color: #888;">Prix payé</small></p>
+                        <button class="btn btn-success" disabled>✅ Possédé</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h2>⬟ Votre bibliothèque est vide</h2>
+                <p>Achetez des jeux pour commencer à jouer !</p>
+                <a href="{{ path('shop_index') }}" class="btn btn-primary">◉ Aller à la boutique</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

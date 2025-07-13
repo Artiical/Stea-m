@@ -1,0 +1,19 @@
+{# templates/main/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Stea-m{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>⬢ Bienvenue sur Stea-m</h1>
+        <p style="text-align: center; font-size: 16px; color: var(--text-secondary); margin-bottom: 32px;">
+            Votre plateforme de jeux vidéo préférée. Découvrez, achetez et jouez aux meilleurs jeux.
+        </p>
+        
+        <div class="navigation">
+            <a href="{{ path('shop_index') }}" class="btn btn-primary">◉ Boutique</a>
+            <a href="{{ path('cart_index') }}" class="btn btn-secondary">◈ Panier</a>
+            <a href="{{ path('library_index') }}" class="btn btn-info">⬟ Ma Bibliothèque</a>
+        </div>
+    </div>
+{% endblock %}

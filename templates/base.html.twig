@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Plateforme de Jeux{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⬢</text></svg>">
+        {% block stylesheets %}
+            {# CSS files are imported via assets/app.js #}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav>
+            <div class="container">
+                <a href="{{ path('home') }}">⌂ Accueil</a>
+                <a href="{{ path('shop_index') }}">◉ Boutique</a>
+                <a href="{{ path('cart_index') }}">◈ Panier</a>
+                <a href="{{ path('library_index') }}">⬟ Bibliothèque</a>
+            </div>
+        </nav>
+        {% block body %}{% endblock %}
+    </body>
+</html>

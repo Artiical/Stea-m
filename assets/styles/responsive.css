@@ -1,0 +1,61 @@
+/* Responsive */
+@media (max-width: 768px) {
+    .container { 
+        padding: 20px; 
+        margin: 12px; 
+        border-radius: 8px;
+    }
+    
+    nav .container { 
+        flex-wrap: wrap; 
+        gap: 4px;
+    }
+    
+    nav a { 
+        padding: 8px 12px; 
+        font-size: 13px;
+    }
+    
+    .games-list { 
+        grid-template-columns: 1fr; 
+        gap: 12px;
+    }
+    
+    h1 { 
+        font-size: 24px; 
+    }
+    
+    .game-item, .cart-item, .library-item {
+        padding: 20px;
+    }
+    
+    .empty-state {
+        padding: 32px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 8px;
+        padding: 16px;
+    }
+    
+    nav {
+        padding: 12px 0;
+    }
+    
+    nav a {
+        padding: 6px 10px;
+        font-size: 12px;
+        margin: 2px;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+}

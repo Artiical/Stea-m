@@ -1,0 +1,91 @@
+{# templates/shop/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Boutique{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="shop-header">
+            <div class="shop-title">
+                <h1>◉ Boutique</h1>
+                <p class="shop-subtitle">Découvrez notre collection de jeux exceptionnels</p>
+            </div>
+            <div class="shop-nav">
+                <a href="{{ path('cart_index') }}" class="btn btn-secondary">
+                    <span class="icon">◈</span> Voir le panier
+                </a>
+            </div>
+        </div>
+        
+        {% if games is not empty %}
+            <div class="shop-stats">
+                <span class="stats-item">
+                    <span class="stats-number">{{ games|length }}</span>
+                    <span class="stats-label">jeu{{ games|length > 1 ? 'x' : '' }} disponible{{ games|length > 1 ? 's' : '' }}</span>
+                </span>
+                <span class="stats-item">
+                    <span class="stats-number">⬢</span>
+                    <span class="stats-label">Tous genres</span>
+                </span>
+            </div>
+            
+            <div class="games-grid">
+                {% for game in games %}
+                    <div class="game-card">
+                        <div class="game-card-header">
+                            <div class="game-thumbnail">
+                                {% if game.image %}
+                                    <img src="{{ game.image }}" alt="{{ game.title }}" class="game-cover" loading="lazy">
+                                {% else %}
+                                    <div class="game-icon">⬢</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="game-card-content">
+                            <h3 class="game-title">{{ game.title }}</h3>
+                            <p class="game-description">{{ game.description }}</p>
+                            
+                            <div class="game-meta">
+                                <div class="game-tags">
+                                    {% if game.platform %}
+                                        <span class="tag tag-platform">{{ game.platform }}</span>
+                                    {% endif %}
+                                    {% if game.genre %}
+                                        <span class="tag tag-genre">{{ game.genre }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="game-rating">
+                                    <span class="rating-stars">★★★★☆</span>
+                                    <span class="rating-text">4.2</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card-footer">
+                            <div class="price-section">
+                                <span class="price-label">Prix</span>
+                                <div class="price-display">
+                                    <span class="currency">€</span>
+                                    <span class="amount">{{ game.price|number_format(2) }}</span>
+                                </div>
+                            </div>
+                            <a href="{{ path('cart_add', {'id': game.id}) }}" class="btn-add-cart">
+                                <span class="icon">◈</span>
+                                <span class="text">Ajouter</span>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-shop">
+                <div class="empty-shop-icon">⬢</div>
+                <h2>Boutique en préparation</h2>
+                <p>Notre équipe travaille dur pour vous proposer les meilleurs jeux. Revenez bientôt !</p>
+                <a href="{{ path('home') }}" class="btn btn-primary">
+                    <span class="icon">⌂</span>
+                    <span>Retourner à l'accueil</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
