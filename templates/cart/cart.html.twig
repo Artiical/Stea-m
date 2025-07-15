@@ -24,7 +24,11 @@
                     {% for game in games %}
                         <div class="cart-item">
                             <div class="cart-item-image">
-                                <div class="game-thumbnail">⬢</div>
+                                {% if game.image %}
+                                    <img src="{{ game.image }}" alt="{{ game.title }}" class="game-thumbnail">
+                                {% else %}
+                                    <div class="game-thumbnail">⬢</div>
+                                {% endif %}
                             </div>
                             <div class="cart-item-details">
                                 <h3 class="game-title">{{ game.title }}</h3>

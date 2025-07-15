@@ -13,10 +13,20 @@
             <div class="library-games">
                 {% for game in games %}
                     <div class="library-item">
-                        <h3>{{ game.title }}</h3>
-                        <p>{{ game.description }}</p>
-                        <p><span class="price">{{ game.price }} €</span> <small style="color: #888;">Prix payé</small></p>
-                        <button class="btn btn-success" disabled>✅ Possédé</button>
+                        <div class="library-item-image">
+                            {% if game.image %}
+                                <img src="{{ game.image }}" alt="{{ game.title }}" class="game-thumbnail-small">
+                            {% else %}
+                                <div class="game-thumbnail-small">⬢</div>
+                            {% endif %}
+                        </div>
+                        <div class="library-item-details">
+                            <h3>{{ game.title }}</h3>
+                            <p>{{ game.description }}</p>
+                        </div>
+                        <div class="library-item-actions">
+                            <button class="btn btn-success" disabled>✅ Possédé</button>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

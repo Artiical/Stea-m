@@ -50,3 +50,38 @@
     display: inline-block;
     border: 1px solid rgba(86, 211, 100, 0.2);
 }
+
+/* Game thumbnails */
+.game-thumbnail-small {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+/* Library item layout */
+.library-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.library-item-image {
+    flex-shrink: 0;
+}
+
+.library-item-details {
+    flex: 1;
+}
+
+.library-item-actions {
+    flex-shrink: 0;
+}
