@@ -184,21 +184,31 @@
         {% if similarGames|length > 0 %}
             <div class="similar-games">
                 <div class="container">
-                    <h3>Jeux similaires</h3>
-                    <div class="similar-games-grid">
-                        {% for similarGame in similarGames %}
-                            <div class="similar-game-item">
-                                <a href="{{ path('game_show', {'id': similarGame.id}) }}">
-                                    {% if similarGame.image %}
-                                        <img src="{{ similarGame.image }}" alt="{{ similarGame.title }}" class="similar-game-image">
-                                    {% else %}
-                                        <div class="similar-game-placeholder">⬢</div>
-                                    {% endif %}
-                                    <h4>{{ similarGame.title }}</h4>
-                                    <p class="similar-game-price">{{ similarGame.price|number_format(2) }}€</p>
-                                </a>
-                            </div>
-                        {% endfor %}
+                    <h3>Jeux similaires dans le genre {{ game.genre }}</h3>
+                    <div class="similar-games-container">
+                        <div class="similar-games-grid">
+                            {% for similarGame in similarGames %}
+                                <div class="similar-game-item">
+                                    <a href="{{ path('game_show', {'id': similarGame.id}) }}">
+                                        <div class="similar-game-image-container"{% if similarGame.image %} style="--bg-image: url('{{ similarGame.image }}')"{% endif %}>
+                                            {% if similarGame.image %}
+                                                <img src="{{ similarGame.image }}" alt="{{ similarGame.title }}" class="similar-game-image">
+                                            {% else %}
+                                                <div class="similar-game-placeholder">⬢</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="similar-game-content">
+                                            <h4>{{ similarGame.title }}</h4>
+                                            {% if similarGame.price > 0 %}
+                                                <p class="similar-game-price">{{ similarGame.price|number_format(2) }}€</p>
+                                            {% else %}
+                                                <p class="similar-game-price free">Gratuit</p>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

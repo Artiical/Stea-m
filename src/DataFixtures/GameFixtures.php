@@ -155,7 +155,7 @@ class GameFixtures extends Fixture
                 'title' => 'Stardew Valley',
                 'description' => 'Simulation de ferme relaxante avec RPG et exploration',
                 'price' => 12.99,
-                'image' => 'https://www.mobygames.com/images/covers/l/650333-stardew-valley-collector-s-edition-nintendo-switch-other.jpg',
+                'image' => 'https://i.playground.ru/e/aLKlQdHO9KydTMC7HrDvEQ.jpeg',
                 'platform' => 'PC',
                 'genre' => 'Simulation'
             ],

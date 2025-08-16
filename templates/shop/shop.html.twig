@@ -31,7 +31,7 @@
                 {% for game in games %}
                     <div class="game-card">
                         <div class="game-card-header">
-                            <div class="game-thumbnail">
+                            <div class="game-thumbnail"{% if game.image %} style="--bg-image: url('{{ game.image }}')"{% endif %}>
                                 {% if game.image %}
                                     <img src="{{ game.image }}" alt="{{ game.title }}" class="game-cover" loading="lazy">
                                 {% else %}
