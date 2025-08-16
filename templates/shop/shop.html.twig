@@ -41,7 +41,9 @@
                         </div>
                         
                         <div class="game-card-content">
-                            <h3 class="game-title">{{ game.title }}</h3>
+                            <h3 class="game-title">
+                                <a href="{{ path('game_show', {'id': game.id}) }}">{{ game.title }}</a>
+                            </h3>
                             <p class="game-description">{{ game.description }}</p>
                             
                             <div class="game-meta">

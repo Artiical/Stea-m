@@ -24,6 +24,16 @@
     line-height: 1.4;
 }
 
+.game-item h3 a, .cart-item h3 a, .library-item h3 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.game-item h3 a:hover, .cart-item h3 a:hover, .library-item h3 a:hover {
+    color: var(--accent-blue);
+}
+
 .game-item p, .cart-item p, .library-item p {
     color: var(--text-secondary);
     line-height: 1.6;

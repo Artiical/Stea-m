@@ -14,18 +14,46 @@ class GameFixtures extends Fixture
             [
                 'title' => 'The Witcher 3: Wild Hunt',
                 'description' => 'RPG épique dans un monde fantasy riche et immersif',
+                'longDescription' => 'En tant que Geralt de Riv, mercenaire spécialisé dans la chasse aux monstres, embarquez pour une aventure épique dans un monde ouvert révolutionnaire. Explorez les îles Skellige, parcourez les rues animées de Novigrad et accomplissez la quête la plus importante de votre vie dans The Witcher 3: Wild Hunt.',
                 'price' => 29.99,
                 'image' => 'https://cdn.supersoluce.com/file/docs/docid_50f633a58f152fee45000051/elemid_4ee9d6ec0a2fe93f0e00000c/the-witcher-3-wild-hunt-pc.jpg',
                 'platform' => 'PC',
-                'genre' => 'RPG'
+                'genre' => 'RPG',
+                'developer' => 'CD PROJEKT RED',
+                'publisher' => 'CD PROJEKT RED',
+                'releaseDate' => new \DateTime('2015-05-19'),
+                'averageRating' => 4.8,
+                'systemRequirements' => [
+                    'OS' => 'Windows 7 64-bit',
+                    'Processeur' => 'Intel CPU Core i5-2500K 3.3GHz',
+                    'Mémoire' => '6 GB RAM',
+                    'Graphiques' => 'Nvidia GPU GeForce GTX 660',
+                    'Stockage' => '35 GB disponible'
+                ],
+                'screenshots' => [
+                    'https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc8plr.jpg',
+                    'https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc8pls.jpg'
+                ]
             ],
             [
                 'title' => 'Cyberpunk 2077',
                 'description' => 'Jeu de rôle futuriste dans Night City',
+                'longDescription' => 'Cyberpunk 2077 est un jeu de rôle d\'action en monde ouvert qui se déroule à Night City, une mégalopole obsédée par le pouvoir, la gloire et les transformations corporelles. Incarnez V, un mercenaire hors-la-loi à la recherche d\'un implant unique qui serait la clé de l\'immortalité.',
                 'price' => 39.99,
                 'image' => 'https://img.seriebox.com/jeux/17/17137/jaquette_81_17137_1.jpg',
                 'platform' => 'PC',
-                'genre' => 'RPG'
+                'genre' => 'RPG',
+                'developer' => 'CD PROJEKT RED',
+                'publisher' => 'CD PROJEKT RED',
+                'releaseDate' => new \DateTime('2020-12-10'),
+                'averageRating' => 4.2,
+                'systemRequirements' => [
+                    'OS' => 'Windows 10 64-bit',
+                    'Processeur' => 'Intel Core i5-3570K ou AMD FX-8310',
+                    'Mémoire' => '8 GB RAM',
+                    'Graphiques' => 'NVIDIA GeForce GTX 970',
+                    'Stockage' => '70 GB disponible'
+                ]
             ],
             [
                 'title' => 'Minecraft',
@@ -165,6 +193,32 @@ class GameFixtures extends Fixture
             $game->setImage($gameData['image'] ?? null);
             $game->setPlatform($gameData['platform'] ?? null);
             $game->setGenre($gameData['genre'] ?? null);
+            
+            // Nouveaux champs optionnels
+            if (isset($gameData['longDescription'])) {
+                $game->setLongDescription($gameData['longDescription']);
+            }
+            if (isset($gameData['developer'])) {
+                $game->setDeveloper($gameData['developer']);
+            }
+            if (isset($gameData['publisher'])) {
+                $game->setPublisher($gameData['publisher']);
+            }
+            if (isset($gameData['releaseDate'])) {
+                $game->setReleaseDate($gameData['releaseDate']);
+            }
+            if (isset($gameData['averageRating'])) {
+                $game->setAverageRating($gameData['averageRating']);
+            }
+            if (isset($gameData['systemRequirements'])) {
+                $game->setSystemRequirements($gameData['systemRequirements']);
+            }
+            if (isset($gameData['screenshots'])) {
+                $game->setScreenshots($gameData['screenshots']);
+            }
+            if (isset($gameData['trailerUrl'])) {
+                $game->setTrailerUrl($gameData['trailerUrl']);
+            }
             
             $manager->persist($game);
         }

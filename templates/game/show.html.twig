@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ game.title }}{% endblock %}
+
+{% block body %}
+    <div class="game-detail-container">
+        {# Header avec navigation #}
+        <div class="game-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="{{ path('home') }}">Accueil</a>
+                    <span>></span>
+                    <a href="{{ path('shop_index') }}">Boutique</a>
+                    <span>></span>
+                    <span>{{ game.title }}</span>
+                </nav>
+            </div>
+        </div>
+
+        {# Section hero principale #}
+        <div class="game-hero">
+            <div class="container">
+                <div class="game-hero-content">
+                    <div class="game-media">
+                        {% if game.image %}
+                            <img src="{{ game.image }}" alt="{{ game.title }}" class="game-hero-image">
+                        {% else %}
+                            <div class="game-hero-placeholder">⬢</div>
+                        {% endif %}
+                        
+                        {% if game.trailerUrl %}
+                            <div class="game-trailer">
+                                <iframe src="{{ game.trailerUrl }}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="game-info">
+                        <h1 class="game-title">{{ game.title }}</h1>
+                        
+                        <div class="game-meta">
+                            {% if game.averageRating %}
+                                <div class="game-rating">
+                                    <span class="rating-stars">
+                                        {% for i in 1..5 %}
+                                            {% if i <= game.averageRating %}
+                                                ⭐
+                                            {% else %}
+                                                ☆
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    <span class="rating-text">{{ game.averageRating|number_format(1) }}/5</span>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="game-tags">
+                                {% if game.genre %}
+                                    <span class="tag genre-tag">{{ game.genre }}</span>
+                                {% endif %}
+                                {% if game.platform %}
+                                    <span class="tag platform-tag">{{ game.platform }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="game-description">
+                            <p>{{ game.description }}</p>
+                        </div>
+
+                        <div class="game-details">
+                            {% if game.developer %}
+                                <div class="detail-item">
+                                    <span class="detail-label">Développeur:</span>
+                                    <span class="detail-value">{{ game.developer }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            {% if game.publisher %}
+                                <div class="detail-item">
+                                    <span class="detail-label">Éditeur:</span>
+                                    <span class="detail-value">{{ game.publisher }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            {% if game.releaseDate %}
+                                <div class="detail-item">
+                                    <span class="detail-label">Date de sortie:</span>
+                                    <span class="detail-value">{{ game.releaseDate|date('d/m/Y') }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="game-actions">
+                        <div class="price-section">
+                            {% if game.price > 0 %}
+                                <div class="price-display">
+                                    <span class="price-amount">{{ game.price|number_format(2) }}€</span>
+                                </div>
+                            {% else %}
+                                <div class="price-display free">
+                                    <span class="price-amount">Gratuit</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <a href="{{ path('cart_add', {'id': game.id}) }}" class="btn btn-primary btn-large">
+                                <span class="icon">🛒</span>
+                                <span>Ajouter au panier</span>
+                            </a>
+                            
+                            <button class="btn btn-secondary btn-large wishlist-btn">
+                                <span class="icon">❤️</span>
+                                <span>Ajouter à la wishlist</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Section contenu détaillé #}
+        <div class="game-content">
+            <div class="container">
+                <div class="content-tabs">
+                    <div class="tab-navigation">
+                        <button class="tab-btn active" data-tab="overview">Vue d'ensemble</button>
+                        {% if game.systemRequirements %}
+                            <button class="tab-btn" data-tab="requirements">Configuration</button>
+                        {% endif %}
+                        {% if game.screenshots %}
+                            <button class="tab-btn" data-tab="screenshots">Captures d'écran</button>
+                        {% endif %}
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-panel active" id="overview">
+                            {% if game.longDescription %}
+                                <div class="long-description">
+                                    <h3>À propos de ce jeu</h3>
+                                    <p>{{ game.longDescription|nl2br }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% if game.systemRequirements %}
+                            <div class="tab-panel" id="requirements">
+                                <div class="system-requirements">
+                                    <h3>Configuration système requise</h3>
+                                    <div class="requirements-grid">
+                                        {% for key, value in game.systemRequirements %}
+                                            <div class="requirement-item">
+                                                <span class="req-label">{{ key }}:</span>
+                                                <span class="req-value">{{ value }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if game.screenshots %}
+                            <div class="tab-panel" id="screenshots">
+                                <div class="screenshots-gallery">
+                                    <h3>Captures d'écran</h3>
+                                    <div class="screenshots-grid">
+                                        {% for screenshot in game.screenshots %}
+                                            <div class="screenshot-item">
+                                                <img src="{{ screenshot }}" alt="Screenshot {{ loop.index }}">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Section jeux similaires #}
+        {% if similarGames|length > 0 %}
+            <div class="similar-games">
+                <div class="container">
+                    <h3>Jeux similaires</h3>
+                    <div class="similar-games-grid">
+                        {% for similarGame in similarGames %}
+                            <div class="similar-game-item">
+                                <a href="{{ path('game_show', {'id': similarGame.id}) }}">
+                                    {% if similarGame.image %}
+                                        <img src="{{ similarGame.image }}" alt="{{ similarGame.title }}" class="similar-game-image">
+                                    {% else %}
+                                        <div class="similar-game-placeholder">⬢</div>
+                                    {% endif %}
+                                    <h4>{{ similarGame.title }}</h4>
+                                    <p class="similar-game-price">{{ similarGame.price|number_format(2) }}€</p>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
