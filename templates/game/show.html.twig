@@ -4,19 +4,6 @@
 
 {% block body %}
     <div class="game-detail-container">
-        {# Header avec navigation #}
-        <div class="game-header">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="{{ path('home') }}">Accueil</a>
-                    <span>></span>
-                    <a href="{{ path('shop_index') }}">Boutique</a>
-                    <span>></span>
-                    <span>{{ game.title }}</span>
-                </nav>
-            </div>
-        </div>
-
         {# Section hero principale #}
         <div class="game-hero">
             <div class="container">
@@ -130,9 +117,6 @@
                         {% if game.systemRequirements %}
                             <button class="tab-btn" data-tab="requirements">Configuration</button>
                         {% endif %}
-                        {% if game.screenshots %}
-                            <button class="tab-btn" data-tab="screenshots">Captures d'écran</button>
-                        {% endif %}
                     </div>
 
                     <div class="tab-content">
@@ -148,27 +132,12 @@
                         {% if game.systemRequirements %}
                             <div class="tab-panel" id="requirements">
                                 <div class="system-requirements">
-                                    <h3>Configuration système requise</h3>
+                                    <h3>Configuration système requise minimale</h3>
                                     <div class="requirements-grid">
                                         {% for key, value in game.systemRequirements %}
                                             <div class="requirement-item">
                                                 <span class="req-label">{{ key }}:</span>
                                                 <span class="req-value">{{ value }}</span>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-
-                        {% if game.screenshots %}
-                            <div class="tab-panel" id="screenshots">
-                                <div class="screenshots-gallery">
-                                    <h3>Captures d'écran</h3>
-                                    <div class="screenshots-grid">
-                                        {% for screenshot in game.screenshots %}
-                                            <div class="screenshot-item">
-                                                <img src="{{ screenshot }}" alt="Screenshot {{ loop.index }}">
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -214,4 +183,34 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // Utiliser event delegation pour éviter les problèmes de navigation
+        document.addEventListener('click', function(e) {
+            // Vérifier si l'élément cliqué est un bouton d'onglet
+            if (e.target.classList.contains('tab-btn')) {
+                e.preventDefault();
+                
+                const targetTab = e.target.getAttribute('data-tab');
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                const tabPanels = document.querySelectorAll('.tab-panel');
+                
+                // Retirer la classe active de tous les boutons et panneaux
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanels.forEach(panel => panel.classList.remove('active'));
+                
+                // Ajouter la classe active au bouton cliqué
+                e.target.classList.add('active');
+                
+                // Afficher le panneau correspondant
+                const targetPanel = document.getElementById(targetTab);
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+            }
+        });
+    </script>
 {% endblock %}

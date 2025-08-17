@@ -15,10 +15,15 @@
     <body>
         <nav>
             <div class="container">
-                <a href="{{ path('home') }}">⌂ Accueil</a>
-                <a href="{{ path('shop_index') }}">◉ Boutique</a>
-                <a href="{{ path('cart_index') }}">◈ Panier</a>
-                <a href="{{ path('library_index') }}">⬟ Bibliothèque</a>
+                <div class="nav-left">
+                    <a href="{{ path('home') }}" class="logo">Stea-m</a>
+                </div>
+                <div class="nav-center">
+                    <a href="{{ path('home') }}">⌂ Accueil</a>
+                    <a href="{{ path('shop_index') }}">◉ Boutique</a>
+                    <a href="{{ path('cart_index') }}">◈ Panier</a>
+                    <a href="{{ path('library_index') }}">⬟ Bibliothèque</a>
+                </div>
             </div>
         </nav>
         {% block body %}{% endblock %}

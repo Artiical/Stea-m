@@ -66,8 +66,8 @@
                             <div class="price-section">
                                 <span class="price-label">Prix</span>
                                 <div class="price-display">
-                                    <span class="currency">€</span>
                                     <span class="amount">{{ game.price|number_format(2) }}</span>
+                                    <span class="currency">€</span>
                                 </div>
                             </div>
                             <a href="{{ path('cart_add', {'id': game.id}) }}" class="btn-add-cart">
